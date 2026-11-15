@@ -16,52 +16,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Download source code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 3. Install project dependencies
       - name: Install dependencies
         run: npm install
 
-      # 4. Build Phaser game
       - name: Build web game
         run: npm run build
 
-      # 5. Setup Java
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      # 6. Setup Android SDK
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools'
 
-      # 7. Add Android platform
       - name: Add Android platform
         run: npx cap add android
 
-      # 8. Sync Capacitor
       - name: Sync Android project
         run: npx cap sync android
 
-      # 9. Build APK
       - name: Build Debug APK
         working-directory: android
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug
 
-      # 10. Upload APK
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: MY-CITY-APK
