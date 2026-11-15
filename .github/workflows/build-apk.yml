@@ -4,50 +4,67 @@ name: Build MY CITY APK
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
+
+permissions:
+  contents: read
 
 jobs:
   build:
+    name: Build Android APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # 1. Download source code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
+      # 3. Install project dependencies
       - name: Install dependencies
         run: npm install
 
+      # 4. Build Phaser game
       - name: Build web game
         run: npm run build
 
+      # 5. Setup Java
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
+      # 6. Setup Android SDK
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      # 7. Add Android platform
       - name: Add Android platform
         run: npx cap add android
 
-      - name: Sync Android
+      # 8. Sync Capacitor
+      - name: Sync Android project
         run: npx cap sync android
 
-      - name: Build APK
+      # 9. Build APK
+      - name: Build Debug APK
         working-directory: android
-        run: chmod +x gradlew && ./gradlew assembleDebug
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
-      - name: Upload APK
+      # 10. Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: MY-CITY-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
-          
+          if-no-files-found: error
+          retention-days: 14
