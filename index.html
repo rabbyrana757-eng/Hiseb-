@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <meta name="theme-color" content="#101a17"/>
+  <title>MY CITY 2.0 — City Builder</title>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-icon">MC</div><div><strong>MY CITY</strong><small>CITY BUILDER <b>2.0</b></small></div></div>
+    <div class="stats">
+      <div><small>শহরের তহবিল</small><b id="money">৳৫,০০,০০০</b></div>
+      <div><small>জনসংখ্যা</small><b id="population">১০০</b></div>
+      <div><small>সন্তুষ্টি</small><b id="happiness">৭৫%</b></div>
+      <div><small>দৈনিক নেট</small><b id="net">৳০</b></div>
+    </div>
+    <div class="top-actions"><button id="saveBtn" class="quiet-btn">সেভ</button><button id="loadBtn" class="quiet-btn">লোড</button></div>
+  </header>
+  <main>
+    <section class="city-panel">
+      <div class="map-topline"><span class="live-dot"></span><span id="mapSize">ম্যাপ ৫০ × ৫০</span><span class="separator">•</span><span id="clock">দিন ১ · সকাল ০৮:০০</span><span id="notice">শহর গড়ে তুলুন</span></div>
+      <div class="game-wrap"><div id="game"></div>
+        <div class="map-controls"><button id="zoomIn" aria-label="Zoom in">＋</button><button id="zoomOut" aria-label="Zoom out">−</button><button id="centerMap" aria-label="Center map">⌖</button></div>
+        <div class="map-legend"><span><i class="legend-road"></i> রাস্তা</span><span><i class="legend-house"></i> আবাসিক</span><span><i class="legend-tree"></i> সবুজ এলাকা</span></div>
+      </div>
+      <div class="bottom-status"><span>● অফলাইন সেভ চালু</span><span id="saveStatus">সেভ প্রস্তুত</span><span>MY CITY 2.0</span></div>
+    </section>
+    <aside class="sidebar">
+      <div class="side-title"><div><small>BUILD YOUR CITY</small><h1>নির্মাণ কেন্দ্র</h1></div><span class="pill">SANDBOX</span></div>
+      <div class="tool-tabs">
+        <button class="tool active" data-tool="select"><span>↖</span>নির্বাচন</button>
+        <button class="tool" data-tool="road"><span>▰</span>রাস্তা</button>
+        <button class="tool" data-tool="bulldoze"><span>⌫</span>ভাঙুন</button>
+      </div>
+      <div class="section-label">শহরের ভবন</div>
+      <div class="building-grid" id="tools">
+        <button class="building-tool" data-tool="house"><span class="building-icon home">⌂</span><b>বাড়ি</b><small>৳৮,০০০</small></button>
+        <button class="building-tool" data-tool="shop"><span class="building-icon shop">▤</span><b>দোকান</b><small>৳১৮,০০০</small></button>
+        <button class="building-tool" data-tool="office"><span class="building-icon office">▥</span><b>অফিস</b><small>৳৩৫,০০০</small></button>
+        <button class="building-tool" data-tool="park"><span class="building-icon park">♣</span><b>পার্ক</b><small>৳১২,০০০</small></button>
+        <button class="building-tool" data-tool="power"><span class="building-icon power">ϟ</span><b>বিদ্যুৎকেন্দ্র</b><small>৳৬০,০০০</small></button>
+        <button class="building-tool" data-tool="water"><span class="building-icon water">◉</span><b>পানির ট্যাংক</b><small>৳৪০,০০০</small></button>
+        <button class="building-tool" data-tool="hospital"><span class="building-icon hospital">✚</span><b>হাসপাতাল</b><small>৳৭০,০০০</small></button>
+        <button class="building-tool" data-tool="school"><span class="building-icon school">▣</span><b>স্কুল</b><small>৳৫০,০০০</small></button>
+      </div>
+      <div class="selected-card" id="selectedCard"><small>নির্বাচিত স্থাপনা</small><h3>কোনো ভবন নির্বাচন করা হয়নি</h3><p>ম্যাপের কোনো ভবনে ট্যাপ করে তথ্য দেখুন।</p></div>
+      <div class="section-label management-label">শহর পরিচালনা</div>
+      <div class="meter"><div><span>বিদ্যুৎ সরবরাহ</span><b id="powerStatus">০ / ০</b></div><div class="track"><i id="powerBar"></i></div></div>
+      <div class="meter"><div><span>পানি সরবরাহ</span><b id="waterStatus">০ / ০</b></div><div class="track water"><i id="waterBar"></i></div></div>
+      <div class="meter"><div><span>কর্মসংস্থান</span><b id="jobsStatus">০%</b></div><div class="track jobs"><i id="jobsBar"></i></div></div>
+      <button id="expandBtn" class="expand-btn">＋ শহরের সীমানা বাড়ান <small>৳৫০,০০০ · +২৫ টাইল</small></button>
+      <div class="speed-row"><span>সময়ের গতি</span><button data-speed="0">Ⅱ</button><button data-speed="1" class="speed-active">▶</button><button data-speed="3">▶▶</button></div>
+      <p class="tip">টিপস: ভবন নির্মাণের আগে কাছাকাছি রাস্তা তৈরি করুন। শহরের সেবা চালু রাখতে বিদ্যুৎ ও পানির ব্যবস্থা নিশ্চিত করুন।</p>
+    </aside>
+  </main>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body></html>
