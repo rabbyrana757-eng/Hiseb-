@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#17251e" />
+  <title>MY CITY – City Builder</title>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">MC</span><div><strong>MY CITY</strong><small>City Builder · v1.0</small></div></div>
+      <div class="stats">
+        <div><small>টাকা</small><b id="money">৳৫,০০,০০০</b></div>
+        <div><small>জনসংখ্যা</small><b id="population">১০০</b></div>
+        <div><small>সন্তুষ্টি</small><b id="happiness">৭৫%</b></div>
+        <div><small>দৈনিক নেট</small><b id="net">৳০</b></div>
+      </div>
+      <div class="top-actions">
+        <button id="saveBtn" class="secondary">Save</button>
+        <button id="loadBtn" class="secondary">Load</button>
+      </div>
+    </header>
+    <main>
+      <section class="game-wrap">
+        <div id="game"></div>
+        <div class="map-hud">
+          <span id="mapSize">ম্যাপ: ৫০ × ৫০</span>
+          <span id="clock">দিন ১ · ০৮:০০</span>
+          <span id="notice">একটি নির্মাণ নির্বাচন করুন</span>
+        </div>
+        <div class="zoom-controls">
+          <button id="zoomIn">＋</button><button id="zoomOut">－</button><button id="centerMap">⌖</button>
+        </div>
+      </section>
+      <aside class="sidebar">
+        <div class="panel-heading"><div><small>CONSTRUCTION</small><h2>নির্মাণ মেনু</h2></div><span class="online-dot"></span></div>
+        <div class="tool-grid" id="tools">
+          <button class="tool active" data-tool="select"><span>↖</span><b>নির্বাচন</b></button>
+          <button class="tool" data-tool="road"><span>▰</span><b>রাস্তা</b></button>
+          <button class="tool" data-tool="house"><span>⌂</span><b>বাড়ি</b><small>৳৮,০০০</small></button>
+          <button class="tool" data-tool="shop"><span>▤</span><b>দোকান</b><small>৳১৮,০০০</small></button>
+          <button class="tool" data-tool="office"><span>▥</span><b>অফিস</b><small>৳৩৫,০০০</small></button>
+          <button class="tool" data-tool="park"><span>♣</span><b>পার্ক</b><small>৳১২,০০০</small></button>
+          <button class="tool" data-tool="power"><span>⚡</span><b>বিদ্যুৎকেন্দ্র</b><small>৳৬০,০০০</small></button>
+          <button class="tool" data-tool="water"><span>♨</span><b>পানির ট্যাংক</b><small>৳৪০,০০০</small></button>
+          <button class="tool" data-tool="hospital"><span>✚</span><b>হাসপাতাল</b><small>৳৭০,০০০</small></button>
+          <button class="tool" data-tool="school"><span>▣</span><b>স্কুল</b><small>৳৫০,০০০</small></button>
+          <button class="tool danger-tool" data-tool="bulldoze"><span>⌫</span><b>ভাঙুন</b></button>
+        </div>
+        <div class="selected-card" id="selectedCard">
+          <small>SELECTED OBJECT</small><h3>কোনো ভবন নির্বাচন করা হয়নি</h3><p>ম্যাপের কোনো ভবনে ট্যাপ করলে বিস্তারিত দেখা যাবে।</p>
+        </div>
+        <div class="economy">
+          <div class="panel-heading"><div><small>CITY MANAGEMENT</small><h2>শহর পরিচালনা</h2></div></div>
+          <div class="meter"><div><span>বিদ্যুৎ</span><b id="powerStatus">০ / ০</b></div><div class="track"><i id="powerBar"></i></div></div>
+          <div class="meter"><div><span>পানি</span><b id="waterStatus">০ / ০</b></div><div class="track water"><i id="waterBar"></i></div></div>
+          <div class="meter"><div><span>চাকরি</span><b id="jobsStatus">০%</b></div><div class="track jobs"><i id="jobsBar"></i></div></div>
+          <div class="actions-row"><button id="expandBtn" class="primary">＋ ম্যাপ বড় করুন</button></div>
+          <div class="speed-row"><span>গেমের গতি</span><button data-speed="0">Ⅱ</button><button data-speed="1" class="speed-active">▶</button><button data-speed="3">▶▶</button></div>
+          <p class="hint">টিপস: রাস্তার পাশে ভবন বসান। বিদ্যুৎ ও পানি না থাকলে ভবন পুরোপুরি কাজ করবে না।</p>
+        </div>
+      </aside>
+    </main>
+    <footer><span>MY CITY · Offline-first city simulation</span><span id="saveStatus">লোকাল সেভ প্রস্তুত</span></footer>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
